@@ -13,18 +13,26 @@ class Quizz extends StatefulWidget{
   }
   }
 
-
+int score=0;
 class _QuizzState extends State<Quizz>{
+
   Widget? activeScreen;
   List<String> selectedAnswers=[];
   @override
+  void scoreUpdate(){
+    score++;
+  }
+  void scoreReset(){
+    selectedAnswers=[];
+    score = 0;
+  }
   void initState(){
     activeScreen=StartScreen(switchScreen);
     super.initState();
   }
   void switchScreen(){
     setState(() {
-      activeScreen= QuestionsScreen(onSelectAnswer:chooseAnswer ,);
+      activeScreen= QuestionsScreen(onSelectAnswer:chooseAnswer ,scoreTrack: scoreUpdate,);
     });
   }
   void chooseAnswer (String answer){
@@ -32,7 +40,7 @@ class _QuizzState extends State<Quizz>{
     if(selectedAnswers.length == questions.length){
       setState(() {
         selectedAnswers=[];
-        activeScreen = ResultsScreen(chosenAnswers: selectedAnswers,);
+        activeScreen = ResultsScreen(chosenAnswers: selectedAnswers,scores: score , resetScore:scoreReset ,);
 
       });
     }

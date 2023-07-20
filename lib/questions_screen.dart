@@ -5,8 +5,9 @@ import 'package:quizz_app/models/quizz_questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key, required this.onSelectAnswer});
+  const QuestionsScreen({super.key, required this.onSelectAnswer, required this.scoreTrack});
   final void Function(String answer) onSelectAnswer;
+  final void Function() scoreTrack;
   @override
   State<QuestionsScreen> createState() {
     return _QuestionsScreenState();
@@ -17,6 +18,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
   void answerQuestion(String selectedAnswer){
     widget.onSelectAnswer(selectedAnswer);
+    if(selectedAnswer == questions[currentQuestionIndex].answers[0]){
+      widget.scoreTrack();
+    }
     setState(() {
       currentQuestionIndex = currentQuestionIndex+1;
     });
