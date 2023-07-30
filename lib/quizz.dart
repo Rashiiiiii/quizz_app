@@ -31,6 +31,7 @@ class _QuizzState extends State<Quizz>{
     super.initState();
   }
   void switchScreen(){
+    scoreReset();
     setState(() {
       activeScreen= QuestionsScreen(onSelectAnswer:chooseAnswer ,scoreTrack: scoreUpdate,);
     });
@@ -41,6 +42,7 @@ class _QuizzState extends State<Quizz>{
       setState(() {
         selectedAnswers=[];
         activeScreen = ResultsScreen(chosenAnswers: selectedAnswers,scores: score , resetScore:scoreReset ,);
+        scoreReset();
 
       });
     }

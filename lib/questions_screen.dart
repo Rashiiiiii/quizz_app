@@ -17,11 +17,12 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
   void answerQuestion(String selectedAnswer){
-    widget.onSelectAnswer(selectedAnswer);
+
     if(selectedAnswer == questions[currentQuestionIndex].answers[0]){
       widget.scoreTrack();
     }
     setState(() {
+      widget.onSelectAnswer(selectedAnswer);
       currentQuestionIndex = currentQuestionIndex+1;
     });
   }
